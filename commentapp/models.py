@@ -12,4 +12,11 @@ class Comment(models.Model):
 
     content = models.TextField(null=False)
 
-    created_at = models.DateTimeField(auto_now=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    is_updated = models.BooleanField(default=False)
+
+    def save(self, *args, **kwargs):
+        if self.pk:
+            self.is_updated = True
+        super().save(*args, **kwargs)

@@ -5,13 +5,20 @@
       {{ comment.writer.profile.nickname }}
     </strong>
     &nbsp&nbsp&nbsp
-    {{ comment.created_at }}
+    {{ comment.updated_at }}
+    {% if comment.is_updated %}
+      <span style="color: gray;"> (Updated)</span>
+    {% endif %}
   </div>
   <div style="margin: 1rem 0;">
     {{ comment.content }}
   </div>
   {% if comment.writer == user %}
   <div style="text-align: right;">
+    <a href="{% url 'commentapp:update' pk=comment.pk %}"\\
+       class="btn btn-dark rounded-pill">
+      Update
+    </a>
     <a href="{% url 'commentapp:delete' pk=comment.pk %}"\\
        class="btn btn-danger rounded-pill">
       Delete

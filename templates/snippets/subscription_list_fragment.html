@@ -28,7 +28,7 @@
     {% if article_list %}
     <div class="container">
         {% for article in article_list %}
-        <a href="{% url 'articleapp:detail' pk=article.pk %}">
+        <a href="{% url 'projectapp:detail' pk=article.project.pk %}">
             {% include 'snippets/card.html' with article=article %}
         </a>
         {% endfor %}

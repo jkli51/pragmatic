@@ -16,21 +16,36 @@
             {{ target_project.description }}
         </h5>
 
+        {% if target_project.writer == user %}
+        <a class="material-icons"
+           style="box-shadow: 0 0 4px #ccc; border-radius: 10rem; padding: .4rem;"
+           href="{% url 'projectapp:update' pk=target_project.pk %}">
+            edit
+        </a>
+
+        <a class="material-icons"
+           style="box-shadow: 0 0 4px #ec5050; border-radius: 10rem; padding: .4rem;"
+           href="{% url 'projectapp:delete' pk=target_project.pk %}">
+            cancel
+        </a>
+        {% endif %}
+        <hr>
+
     </div>
-    
+
     <div class="text-center mb-5">
         {% if user.is_authenticated %}
-            {% if not subscription %}
-            <a href="{% url 'subscribeapp:subscribe' %}?project_pk={{ target_project.pk }}"
-                class="btn btn-primary rounded-pill px-4">
-                Subscribe
-            </a>
-            {% else %}
-            <a href="{% url 'subscribeapp:subscribe' %}?project_pk={{ target_project.pk }}"
-                class="btn btn-dark rounded-pill px-4">
-                Unsubscribe
-            </a>
-            {% endif %}
+        {% if not subscription %}
+        <a href="{% url 'subscribeapp:subscribe' %}?project_pk={{ target_project.pk }}"
+           class="btn btn-primary rounded-pill px-4">
+            Subscribe
+        </a>
+        {% else %}
+        <a href="{% url 'subscribeapp:subscribe' %}?project_pk={{ target_project.pk }}"
+           class="btn btn-dark rounded-pill px-4">
+            Unsubscribe
+        </a>
+        {% endif %}
         {% endif %}
     </div>
 
